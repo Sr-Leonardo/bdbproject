@@ -1,21 +1,16 @@
 version: 2.1
 
 jobs:
-  build:
-
+  test-app:
     docker:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
       - run:
-          name: Build
-          command: mvn clean install
+          name: Execute tests
+          command: mvn verify
 
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  test-app:
     jobs:
-      - build
+      - test-app
