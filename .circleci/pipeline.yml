@@ -1,18 +1,23 @@
 version: 2.1
 
+executors:
+  ubuntu-16-04:
+    machine:
+      image: ubuntu-1604:201903-01
+      docker_layer_caching: true
+
 jobs:
   build:
-    docker:
-      - image: cimg/base:stable
+    executor: ubuntu-16-04
     steps:
-      - checkout
       - run:
-          name: "Say hello"
-          command: "Estoy probando ahora esto"
-      - build
-      - run: |
-          mvn clean install
-      - finally
+          name: dependencies-downloading
+          command: mvn clean install -Dmaven.test.skip=true
+
+      - persist_to_workspace:
+          root: .
+          paths: target/*
+
       - run:
           name: "Say hello"
           command: "Estoy probando ahora esto"
