@@ -60,19 +60,12 @@ public class PersonController {
 
     @GetMapping("/getFather")
     public boolean existFather() {
-        if (personService.existFather())
-            return true;
-        else
-            return false;
+        return personService.existFather();
     }
 
     @GetMapping("/getMother")
     public boolean existMother() {
-        if (personService.existMother())
-            return true;
-        else
-            return false;
+        return personService.existMother();
     }
-
 
 }
