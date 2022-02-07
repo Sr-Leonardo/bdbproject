@@ -9,6 +9,9 @@ import com.example.bdbproject.services.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,11 +41,11 @@ public class PersonServiceImpl implements IPersonService {
 
     @Override
     public boolean adopt(int idChild) {
-        if (!existFather() && !existMother()){
+        if (!existFather() && !existMother()) {
             int idFather = personRepository.getIdFather();
             int idMother = personRepository.getIdMother();
             personRepository.adoptChild(idFather, idMother, idChild);
-        }else
+        } else
             return false;
 
         return true;
@@ -54,6 +57,16 @@ public class PersonServiceImpl implements IPersonService {
             return false;
         else
             return true;
+    }
+
+    @Override
+    public boolean existPerson(Person person) {
+
+        if (personRepository.existPerson(person.getFull_name()) > 0)
+            return false;
+        else
+            return true;
+
     }
 
     @Override

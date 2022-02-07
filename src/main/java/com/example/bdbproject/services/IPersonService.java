@@ -14,6 +14,8 @@ public interface IPersonService {
 
     boolean adopt(int idChild);
 
+    boolean existPerson(Person person);
+
     boolean existFather();
 
     boolean existMother();

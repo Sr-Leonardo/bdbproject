@@ -17,6 +17,10 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
     @Query(value = "{Call getChildren()}", nativeQuery = true)
     List<PeopleModel> getChildren();
 
+    @Query(value = "SELECT Count(*) FROM person\n" +
+            "WHERE full_Name = ?1 AND person.active = 1", nativeQuery = true)
+    int existPerson(String name);
+
     @Query(value = "SELECT COUNT(*) FROM father \n" +
             "INNER JOIN person ON person.id_person = father.id_person\n" +
             "WHERE person.active = 1", nativeQuery = true)

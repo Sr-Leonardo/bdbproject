@@ -28,8 +28,13 @@ public class PersonController {
         return personService.adopt(idChild);
     }
 
+    @PostMapping("/validatePerson")
+    public boolean existPerson(@RequestBody Person person){
+        return personService.existPerson(person);
+    }
+
     @PostMapping("/addChild")
-    public void addChild(@RequestParam Person person){
+    public void addChild(@RequestBody Person person){
         personService.addChild(person);
     }
 
